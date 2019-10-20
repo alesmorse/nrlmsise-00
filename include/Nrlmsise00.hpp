@@ -4,6 +4,9 @@
 #include <memory>
 #include "../detail/Nrlmsise00_p.hpp"
 
+/**
+ * @brief Atmosphere namespace
+ */
 namespace atmos
 {
     /**

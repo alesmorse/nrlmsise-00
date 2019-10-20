@@ -2,6 +2,9 @@
 
 namespace atmos
 {
+    /**
+     * @brief Namespace for data arrays and variables
+     */
     namespace data
     {
         const double d_RGAS = 831.4; // Gas constant

@@ -6,31 +6,47 @@
 
 namespace atmos
 {
+    /**
+     * @brief Class containing NRLMSISE-00 implementation
+     *
+     */
     class CNrlmsise00_p
     {
     private:
-        std::array<int, 24>    a_switches;
-        std::array<double, 24> a_sw;
-        std::array<double, 24> a_swc;
 
-        // PARAMB
-        double d_gsurf;
-        double d_re;
+        /// @name Flags/switches
+        ///@{
+        std::array<int, 24>    a_switches; ///< User-defined
+        std::array<double, 24> a_sw;       ///< Internal
+        std::array<double, 24> a_swc;      ///< Internal
+        ///@}
 
-        // GTS3C
+        /// @name PARAMB
+        ///@{
+        double d_gsurf; ///< Latitude dependant gravity
+        double d_re;    ///< Latitude dependandt Earth radius
+        ///@}
+
+        /// GTS3C
         double d_dd;
 
-        // DMIX
+        /// @name DMIX
+        ///@{
         double d_dm04, d_dm16, d_dm28, d_dm32, d_dm40, d_dm01, d_dm14;
+        ///@}
 
-        // MESO7
+        /// @name MESO7
+        ///@{
         std::array<double,5> a_meso_tn1;
         std::array<double,4> a_meso_tn2;
         std::array<double,5> a_meso_tn3;
         std::array<double,2> a_meso_tgn1;
         std::array<double,2> a_meso_tgn2;
         std::array<double,2> a_meso_tgn3;
+        ///@}
 
+        /// @name LPOLY
+        ///@{
         double d_dfa;
         std::array<std::array<double,9>,4> a_plg;
         double d_ctloc, d_stloc;
@@ -38,6 +54,7 @@ namespace atmos
         double d_c3tloc, d_s3tloc;
         double d_apdf;
         std::array<double,4> a_apt;
+        ///@}
 
         /**
          * @brief Calculate latitude variable gravity (GV) and effective radius (REFF)
@@ -70,6 +87,7 @@ namespace atmos
          * @return double
          */
         static double ccor2(const double& alt, const double& r, const double h1, const double zh, const double h2);
+
         double scalh(const double& alt, const double xm, const double temp) const;
 
         /**

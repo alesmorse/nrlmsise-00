@@ -50,8 +50,11 @@ install(TARGETS  ${LIB_NAME}
 install(DIRECTORY include/ DESTINATION include/${LIB_NAME}
     FILES_MATCHING PATTERN "*.hpp")
 
+# Unit tests
+enable_testing()
 add_subdirectory(tests)
 
+# Doxygen documentation
 add_doxygen_doc(
     BUILD_DIR
         ${CMAKE_CURRENT_BINARY_DIR}/docs
