@@ -1,4 +1,5 @@
 #include "Nrlmsise00.hpp"
+#include "Nrlmsise00_p.hpp"
 
 namespace atmos
 {
@@ -6,6 +7,8 @@ namespace atmos
     {
         p_detail.reset(new CNrlmsise00_p(flags));
     }
+
+    CNrlmsise00::~CNrlmsise00() = default;
 
     void CNrlmsise00::gtd7(const int doy, const double sec, const double& alt,
                  const double& g_lat, const double& g_long, const double& lst, const double f107A, const double f107,

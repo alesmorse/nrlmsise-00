@@ -2,13 +2,13 @@
 #define atmos_NRLMSISE00_H
 
 #include <memory>
-#include "../detail/Nrlmsise00_p.hpp"
 
 /**
  * @brief Atmosphere namespace
  */
 namespace atmos
 {
+    class CNrlmsise00_p;
     /**
      * @brief Class to access NRLMSISE-00
      *
@@ -76,6 +76,11 @@ namespace atmos
          * @note 0 is off, 1 is on, and 2 is main effects off but cross terms on.
          */
         CNrlmsise00(const std::array<int,24>& flags);
+
+        /**
+         * @brief Destroy the CNrlmsise00 object
+         */
+        ~CNrlmsise00();
 
         /**
          * @brief Neutral Atmosphere Empirical Model from the surface to lower exosphere.
