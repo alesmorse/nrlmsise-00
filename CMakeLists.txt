@@ -1,53 +1,61 @@
 cmake_minimum_required (VERSION 3.7.0 FATAL_ERROR)
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_modules)
-
-
-project(NRLMSISE-00 LANGUAGES CXX)
-set(LIB_NAME "nrlmsise00")
-
-# General testing information
-include(CTest)
-include(UseDoxygenDoc)
+project(nrlmsise00
+    LANGUAGES CXX
+    VERSION 1.0.0)
 
 # Compiler options
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 
-add_library(${LIB_NAME}
+message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
+
+# Set build type if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
+message(STATUS "Build type is set to ${CMAKE_BUILD_TYPE}")
+
+# General testing information
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_modules)
+include(CTest)
+include(UseDoxygenDoc)
+
+
+add_library(${PROJECT_NAME}
     SHARED
         include/Nrlmsise00.hpp
         src/Nrlmsise00.cpp
     )
 
-set_target_properties(${LIB_NAME}
+set_target_properties(${PROJECT_NAME}
     PROPERTIES
         CXX_STANDARD 11
         CXX_STANDARD_REQUIRED ON
         POSITION_INDEPENDENT_CODE 1
     )
 
-target_sources(${LIB_NAME}
+target_sources(${PROJECT_NAME}
     PRIVATE
         src/Nrlmsise00_p.cpp
         src/Nrlmsise00_math.cpp
         src/Nrlmsise00_data.cpp
     )
 
-target_include_directories(${LIB_NAME}
+target_include_directories(${PROJECT_NAME}
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/detail>
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include/${LIB_NAME}>
+        $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
     )
 
-install(TARGETS  ${LIB_NAME}
-        EXPORT   atmosTargets
+install(TARGETS  ${PROJECT_NAME}
         LIBRARY  DESTINATION lib
         ARCHIVE  DESTINATION lib
-        INCLUDES DESTINATION include/${LIB_NAME})
+        INCLUDES DESTINATION include/${PROJECT_NAME})
 
-install(DIRECTORY include/ DESTINATION include/${LIB_NAME}
+install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME}
     FILES_MATCHING PATTERN "*.hpp")
 
 # Unit tests
