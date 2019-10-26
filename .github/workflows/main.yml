@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: alesmorse/setup-cppunit@releases/v1
-      with:
-        prefix : $HOME/scratch
+#    - uses: alesmorse/setup-cppunit@releases/v1
+#      with:
+#        prefix : $HOME/scratch
+    - name: Get CppUnit
+      run: sudo apt-get install libcppunit-dev
     - uses: actions/checkout@v1
     - name: Create configuration
       run:  |
@@ -17,6 +19,5 @@ jobs:
         cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/scratch ..
     - name: Make library
       run: make -C_build/
-      timeout-minutes: 5
     - name: Run Tests
       run: make -C_build/ test
