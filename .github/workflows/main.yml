@@ -7,11 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: alesmorse/setup-cppunit@releases/v1
+      with:
+        prefix : $GITHUB_WORKSPACE
     - uses: actions/checkout@v1
     - name: Create configuration
       run:  |
         mkdir _build && cd _build
-        cmake ..
+        cmake -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE ..
     - name: Make library
       run: make
       timeout-minutes: 5
