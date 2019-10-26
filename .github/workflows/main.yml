@@ -7,9 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#    - uses: alesmorse/setup-cppunit@releases/v1
-#      with:
-#        prefix : $HOME/scratch
     - name: Get CppUnit
       run: sudo apt-get install libcppunit-dev
     - uses: actions/checkout@v1
