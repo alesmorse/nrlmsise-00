@@ -9,12 +9,12 @@ jobs:
     steps:
     - uses: alesmorse/setup-cppunit@releases/v1
       with:
-        prefix : $GITHUB_WORKSPACE
+        prefix : /usr/local/
     - uses: actions/checkout@v1
     - name: Create configuration
       run:  |
         mkdir _build && cd _build
-        cmake -DCMAKE_INSTALL_PREFIX:PATH=$GITHUB_WORKSPACE ..
+        cmake ..
     - name: Make library
       run: make
       timeout-minutes: 5
