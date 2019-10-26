@@ -19,8 +19,6 @@ message(STATUS "Build type is set to ${CMAKE_BUILD_TYPE}")
 # General testing information
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_modules)
 include(CTest)
-include(UseDoxygenDoc)
-
 
 add_library(${PROJECT_NAME}
     SHARED
@@ -63,13 +61,17 @@ enable_testing()
 add_subdirectory(tests)
 
 # Doxygen documentation
-add_doxygen_doc(
-    BUILD_DIR
-        ${CMAKE_CURRENT_BINARY_DIR}/docs
-    DOXY_FILE
-        ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
-    TARGET_NAME
-        docs
-    COMMENT
-        "HTML Documentation"
-)
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+    include(UseDoxygenDoc)
+    add_doxygen_doc(
+        BUILD_DIR
+            ${CMAKE_CURRENT_BINARY_DIR}/docs
+        DOXY_FILE
+            ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+        TARGET_NAME
+            docs
+        COMMENT
+            "HTML Documentation"
+    )
+endif()
