@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Create configuration
+      run:  |
+        cmake -S . -B ./_build
+        cd _build
+    - name: Make library
+      run: make
+      timeout-minutes: 5
+    - name: Run Tests
+      run: make test
