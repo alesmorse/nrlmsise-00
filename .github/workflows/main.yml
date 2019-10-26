@@ -10,8 +10,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Create configuration
       run:  |
-        cmake -S . -B ./_build
-        cd _build
+        mkdir _build && cd _build
+        cmake ..
     - name: Make library
       run: make
       timeout-minutes: 5
