@@ -16,7 +16,7 @@ jobs:
         mkdir _build && cd _build
         cmake -DCMAKE_INSTALL_PREFIX:PATH=$HOME/scratch ..
     - name: Make library
-      run: make
+      run: make -C_build/
       timeout-minutes: 5
     - name: Run Tests
-      run: make test
+      run: make -C_build/ test
