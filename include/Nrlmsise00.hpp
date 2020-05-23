@@ -67,7 +67,6 @@ namespace atmos
         std::unique_ptr< CNrlmsise00_p > p_detail; ///< Pointer to NRLMSISE-00 implementation
 
     public:
-
         /**
          * @brief Construct a new CNrlmsise00 object
          *

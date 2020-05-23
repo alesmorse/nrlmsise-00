@@ -13,7 +13,6 @@ namespace atmos
     class CNrlmsise00_p
     {
     private:
-
         /// @name Flags/switches
         ///@{
         std::array<int, 24>    a_switches; ///< User-defined
@@ -195,7 +194,6 @@ namespace atmos
                  std::array<double,7>& ap, std::array<double,9>& d, std::array<double,2>& t);
 
     public:
-
         /**
          * @brief Construct a new CNrlmsise00_p object
          *

@@ -432,6 +432,6 @@ namespace test
 
     void Nrlmsise00Test::tearDown()
     {
-
+        //Empty
     }
 } // namespace test
