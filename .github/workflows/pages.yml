@@ -1,0 +1,67 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Doxygen and Graphviz
+        run: sudo apt-get install -y doxygen graphviz
+
+      - name: Download doxygen-awesome-css
+        run: |
+          curl -L \
+            https://raw.githubusercontent.com/jothepro/doxygen-awesome-css/v2.3.4/doxygen-awesome.css \
+            -o doxygen-awesome.css
+
+      - name: Generate Doxygen documentation
+        run: |
+          sed -e 's|@PROJECT_SOURCE_DIR@|.|g' \
+              -e 's|@DOXYGEN_DOT_PATH@||g' \
+              -e 's|^OUTPUT_DIRECTORY[[:space:]]*=.*|OUTPUT_DIRECTORY = _doxygen|' \
+              -e 's|^HTML_EXTRA_STYLESHEET[[:space:]]*=.*|HTML_EXTRA_STYLESHEET = doxygen-awesome.css|' \
+              docs/Doxyfile.in > Doxyfile
+          doxygen Doxyfile
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Build MkDocs site
+        run: mkdocs build --site-dir _site
+
+      - name: Copy Doxygen docs into site
+        run: cp -r _doxygen/html _site/api
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

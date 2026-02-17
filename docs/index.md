@@ -13,3 +13,7 @@ The NRLMSISE-00 model was developed by Mike Picone, Alan Hedin, and Doug Drob. T
   * Added a function that returns directly the total atmospheric density (including anomalous oxygen contribution), atmos::CNrlmsise00::density. This function shall be used for satellite orbit propagations.
 * Added unit-testing suite (CppUnit).
 * The library is making use of C++11 standard.
+
+## API Documentation
+
+Full API documentation is available [here](api/index.html).

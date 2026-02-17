@@ -1,0 +1,32 @@
+site_name: NRLMSISE-00
+site_description: Unofficial C++ port of the NRLMSISE-00 Model 2001 empirical atmosphere model
+site_url: https://alesmorse.github.io/nrlmsise-00/
+repo_url: https://github.com/alesmorse/nrlmsise-00
+repo_name: alesmorse/nrlmsise-00
+
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue-grey
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue-grey
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.top
+    - navigation.instant
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Home: index.md
