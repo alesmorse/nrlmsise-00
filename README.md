@@ -1,7 +1,7 @@
 NRLMSISE-00 ATMOSPHERE MODEL
 [![License: LGPL-3.0](https://img.shields.io/badge/License-LGPL--3.0-blue)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Actions Status](https://github.com/alesmorse/nrlmsise-00/workflows/CI/badge.svg)](https://github.com/alesmorse/nrlmsise-00/actions)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/alesmorse/nrlmsise-00.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/alesmorse/nrlmsise-00/context:cpp)
+[![CodeFactor](https://www.codefactor.io/repository/github/alesmorse/nrlmsise-00/badge/master)](https://www.codefactor.io/repository/github/alesmorse/nrlmsise-00/overview/master)
 ===========
 
 Unofficial C++ port of the NRLMSISE-00 Model 2001 empirical atmosphere model.
