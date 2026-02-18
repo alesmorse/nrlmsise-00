@@ -56,9 +56,17 @@ install(TARGETS  ${PROJECT_NAME}
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME}
     FILES_MATCHING PATTERN "*.hpp")
 
-# Unit tests
-enable_testing()
-add_subdirectory(tests)
+# Unit tests (optional, controlled by BUILD_TESTING, default ON)
+if(BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+# Python bindings (optional, requires pybind11, default OFF)
+option(BUILD_PYTHON "Build Python bindings" OFF)
+if(BUILD_PYTHON)
+    add_subdirectory(python)
+endif()
 
 # Doxygen documentation
 find_package(Doxygen)
