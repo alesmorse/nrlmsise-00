@@ -10,14 +10,17 @@ PYBIND11_MODULE(nrlmsise00, m)
     m.doc() = "Python bindings for the NRLMSISE-00 atmosphere model";
 
     py::class_<atmos::CNrlmsise00>(m, "CNrlmsise00")
-        .def(py::init<const std::array<int, 24>&>(),
+        .def(py::init([](const std::array<int, 24>& flags)
+             {
+                 return new atmos::CNrlmsise00(flags);
+             }),
              py::arg("flags"),
              "Construct with explicit flags array (24 elements, 0=off, 1=on, 2=cross terms only)")
         .def(py::init([]()
              {
                  std::array<int, 24> flags;
                  flags.fill(1);
-                 return atmos::CNrlmsise00(flags);
+                 return new atmos::CNrlmsise00(flags);
              }),
              "Construct with all flags set to 1 (default)")
         .def("density",
